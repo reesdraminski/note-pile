@@ -1,3 +1,4 @@
+const STORAGE_LOCATION = "sticky-notes";
 const DEFAULT_NOTE_HEIGHT = "200px";
 const DEFAULT_NOTE_WIDTH = "200px";
 
@@ -10,7 +11,7 @@ let dragObj = null;
  */
 (function initUI() {
     // load notes from memory and add them to the screen
-    NOTES = JSON.parse(localStorage.getItem("notes")) || [];
+    NOTES = localStorage.getItem(STORAGE_LOCATION) ? JSON.parse(localStorage.getItem(STORAGE_LOCATION)) : [];
     NOTES.forEach(data => createNoteEl(data));
 
     // detect right click on page to create a note
@@ -134,7 +135,7 @@ function bindUndragListener() {
  */
 function saveData() 
 {
-    localStorage.setItem("notes", JSON.stringify(NOTES));
+    localStorage.setItem(STORAGE_LOCATION, JSON.stringify(NOTES));
 }
 
 /**
